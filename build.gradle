@@ -26,10 +26,10 @@ android {
 allprojects {
     plugins.withType(com.android.build.gradle.api.AndroidBasePlugin).configureEach {
         android {
-            compileSdk 35
+            compileSdk 36
             defaultConfig {
                 minSdk 31
-                targetSdk 35
+                targetSdk 36
                 vectorDrawables.useSupportLibrary = true
             }
             lint {
