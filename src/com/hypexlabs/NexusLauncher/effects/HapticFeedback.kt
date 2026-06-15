@@ -31,6 +31,10 @@ object HapticFeedback {
 
     fun selectionChanged(context: Context) {
         val view = (context as? android.app.Activity)?.window?.decorView
-        view?.performHapticFeedback(HapticFeedbackConstants.REJECTION)
+        try {
+            view?.performHapticFeedback(HapticFeedbackConstants.REJECTION)
+        } catch (_: Exception) {
+            view?.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+        }
     }
 }

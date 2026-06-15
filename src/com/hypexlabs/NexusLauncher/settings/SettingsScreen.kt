@@ -68,19 +68,7 @@ fun SettingsScreen(
             }
 
             SettingsSection("Wallpaper") {
-                val context = androidx.compose.ui.platform.LocalContext.current
-                SettingsRow(
-                    title = "Change Wallpaper",
-                    onClick = {
-                        com.mohamedrejeb.calf.permissions.CalfPermissionsManager(
-                            context
-                        ).requestPermission(
-                            android.Manifest.permission.READ_EXTERNAL_STORAGE,
-                            onGranted = { /* file picker */ },
-                            onDenied = {},
-                        )
-                    }
-                )
+                SettingsRow("Change Wallpaper", "Pick from gallery")
             }
 
             SettingsSection("Gestures") {

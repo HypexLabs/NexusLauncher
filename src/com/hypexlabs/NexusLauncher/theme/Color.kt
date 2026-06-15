@@ -1,5 +1,7 @@
 package com.hypexlabs.NexusLauncher.theme
 
+import androidx.compose.material3.darkColorScheme
+import androidx.compose.material3.lightColorScheme
 import androidx.compose.ui.graphics.Color
 
 object iOSColors {
@@ -13,43 +15,31 @@ object iOSColors {
     val systemPurple = Color(0xFFAF52DE)
     val systemPink = Color(0xFFFF2D55)
     val systemGray = Color(0xFF8E8E93)
-    val systemGray2 = Color(0xFFAEAEB2)
-    val systemGray3 = Color(0xFFC7C7CC)
-    val systemGray4 = Color(0xFFD1D1D6)
-    val systemGray5 = Color(0xFFE5E5EA)
-    val systemGray6 = Color(0xFFF2F2F7)
 
     val lightBackground = Color(0xFFF2F2F7)
-    val lightGroupedBackground = Color(0xFFFFFFFF)
-    val lightSecondaryGroupedBackground = Color(0xFFF2F2F7)
-    val lightLabel = Color(0xFF000000)
-    val lightSecondaryLabel = Color(0x993C3C43)
-    val lightTertiaryLabel = Color(0x4D3C3C43)
-    val lightQuaternaryLabel = Color(0x2E3C3C43)
-    val lightSeparator = Color(0x1E3C3C43)
-    val lightOpaqueSeparator = Color(0x1E3C3C43)
-    val lightFill = Color(0x8078797D)
-    val lightSecondaryFill = Color(0x4078797D)
-    val lightTertiaryFill = Color(0x2078797D)
-    val lightQuaternaryFill = Color(0x1078797D)
-
     val darkBackground = Color(0xFF1C1C1E)
-    val darkGroupedBackground = Color(0xFF2C2C2E)
-    val darkSecondaryGroupedBackground = Color(0xFF1C1C1E)
+    val lightLabel = Color(0xFF000000)
     val darkLabel = Color(0xFFFFFFFF)
-    val darkSecondaryLabel = Color(0x99EBEBF5)
-    val darkTertiaryLabel = Color(0x4DEBEBF5)
-    val darkQuaternaryLabel = Color(0x30EBEBF5)
-    val darkSeparator = Color(0x1E545458)
-    val darkOpaqueSeparator = Color(0x1E545458)
-    val darkFill = Color(0x8078797D)
-    val darkSecondaryFill = Color(0x4078797D)
-    val darkTertiaryFill = Color(0x2078797D)
-    val darkQuaternaryFill = Color(0x1078797D)
 
     val dockLight = Color(0xCCD1D1D6)
     val dockDark = Color(0x662C2C2E)
-    val searchLight = Color(0x1A767680)
-    val searchDark = Color(0x1AFFFFFF)
     val badgeRed = Color(0xFFFF3B30)
 }
+
+fun lightColorScheme() = lightColorScheme(
+    primary = iOSColors.systemBlue,
+    onPrimary = Color.White,
+    secondary = iOSColors.systemGreen,
+    tertiary = iOSColors.systemOrange,
+    surface = iOSColors.lightBackground,
+    onSurface = iOSColors.lightLabel,
+)
+
+fun darkColorScheme() = darkColorScheme(
+    primary = iOSColors.systemBlue,
+    onPrimary = Color.White,
+    secondary = iOSColors.systemGreen,
+    tertiary = iOSColors.systemOrange,
+    surface = iOSColors.darkBackground,
+    onSurface = iOSColors.darkLabel,
+)

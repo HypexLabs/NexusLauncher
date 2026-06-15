@@ -93,7 +93,7 @@ private fun AppLibraryIcon(
             contentAlignment = Alignment.Center,
         ) {
             Icon(
-                imageVector = androidx.compose.material.icons.Icons.Default.Apps,
+                imageVector = androidx.compose.material.icons.Icons.Filled.Apps,
                 contentDescription = "App Library",
                 tint = Color.White,
                 modifier = Modifier.size(24.dp),

@@ -10,7 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.IntOffset
-import kotlinx.coroutines.delay
+import androidx.compose.ui.unit.dp
 import kotlin.math.roundToInt
 
 class ParallaxState {
