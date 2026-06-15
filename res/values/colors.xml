@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="nexus_accent">#FF6C00</color>
+    <color name="nexus_accent_secondary">#007AFF</color>
+    <color name="nexus_background">#FFF5F5F5</color>
+    <color name="nexus_surface">#FFFFFFFF</color>
+    <color name="nexus_dock">#1AFFFFFF</color>
+    <color name="nexus_drawer">#FFF2F2F7</color>
+    <color name="nexus_search_bg">#FFFFFFFF</color>
+    <color name="nexus_text_primary">#DE000000</color>
+    <color name="nexus_text_secondary">#99000000</color>
+    <color name="nexus_icon_tint">#FF333333</color>
+</resources>

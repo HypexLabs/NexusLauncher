@@ -1,0 +1,78 @@
+plugins {
+    alias libs.plugins.android.application
+    alias libs.plugins.android.library apply false
+    alias libs.plugins.kotlin.android
+    alias libs.plugins.kotlin.compose
+}
+
+android {
+    namespace "com.hypexlabs.NexusLauncher"
+
+    defaultConfig {
+        applicationId "com.hypexlabs.NexusLauncher"
+        versionCode 1
+        versionName "1.0.0"
+    }
+
+    sourceSets {
+        main {
+            res.srcDirs = ["res"]
+            java.srcDirs = ["src"]
+            manifest.srcFile "AndroidManifest.xml"
+        }
+    }
+}
+
+allprojects {
+    plugins.withType(com.android.build.gradle.api.AndroidBasePlugin).configureEach {
+        android {
+            compileSdk 35
+            defaultConfig {
+                minSdk 31
+                targetSdk 35
+                vectorDrawables.useSupportLibrary = true
+            }
+            lint {
+                abortOnError false
+                checkReleaseBuilds false
+            }
+            compileOptions {
+                sourceCompatibility JavaVersion.VERSION_17
+                targetCompatibility JavaVersion.VERSION_17
+            }
+            kotlinOptions {
+                jvmTarget = "17"
+            }
+            buildFeatures {
+                compose true
+            }
+        }
+    }
+
+    configurations.configureEach {
+        resolutionStrategy.eachDependency {
+            if ("${requested.group}:${requested.name}" == "androidx.core:core") {
+                useVersion("1.15.0")
+            }
+        }
+    }
+}
+
+dependencies {
+    implementation libs.androidx.core.ktx
+    implementation libs.androidx.lifecycle.runtime.ktx
+    implementation libs.lottie
+
+    implementation platform(libs.compose.bom)
+    implementation libs.compose.ui
+    implementation libs.compose.ui.graphics
+    implementation libs.compose.ui.tooling.preview
+    implementation libs.compose.material3
+    implementation libs.compose.material.icons
+    implementation libs.compose.foundation
+    implementation libs.compose.animation
+    implementation libs.compose.runtime
+    implementation libs.androidx.activity.compose
+    implementation libs.androidx.navigation.compose
+    debugImplementation libs.compose.ui.tooling
+}

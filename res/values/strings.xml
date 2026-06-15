@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Nexus Launcher</string>
+    <string name="search_hint">Search</string>
+    <string name="settings_title">Nexus Settings</string>
+    <string name="all_apps">All Apps</string>
+    <string name="dock">Dock</string>
+</resources>
