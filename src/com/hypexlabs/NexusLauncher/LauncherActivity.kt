@@ -10,8 +10,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import com.hypexlabs.NexusLauncher.home.AppDrawer
-import com.hypexlabs.NexusLauncher.home.HomeScreen
+import com.hypexlabs.NexusLauncher.home.AppLibrary
+import com.hypexlabs.NexusLauncher.home.iOSHomeScreen
 import com.hypexlabs.NexusLauncher.theme.NexusTheme
 
 class LauncherActivity : ComponentActivity() {
@@ -28,28 +28,46 @@ class LauncherActivity : ComponentActivity() {
 
 @Composable
 fun LauncherContent() {
-    var showDrawer by remember { mutableStateOf(false) }
+    var showAppLibrary by remember { mutableStateOf(false) }
     val context = LocalContext.current
 
     Box(modifier = Modifier.fillMaxSize()) {
         AnimatedContent(
-            targetState = showDrawer,
+            targetState = showAppLibrary,
             transitionSpec = {
                 if (targetState) {
-                    slideInVertically { it } + fadeIn() togetherWith
-                        slideOutVertically { -it / 3 } + fadeOut()
+                    slideInVertically(
+                        initialOffsetY = { it },
+                        animationSpec = androidx.compose.animation.core.spring(
+                            dampingRatio = androidx.compose.animation.core.Spring.DampingRatioMediumBouncy,
+                            stiffness = androidx.compose.animation.core.Spring.StiffnessMedium,
+                        ),
+                    ) + fadeIn() togetherWith
+                        slideOutVertically(
+                            targetOffsetY = { -it / 3 },
+                            animationSpec = androidx.compose.animation.core.spring(),
+                        ) + fadeOut()
                 } else {
-                    slideInVertically { -it } + fadeIn() togetherWith
-                        slideOutVertically { it } + fadeOut()
+                    slideInVertically(
+                        initialOffsetY = { -it },
+                        animationSpec = androidx.compose.animation.core.spring(),
+                    ) + fadeIn() togetherWith
+                        slideOutVertically(
+                            targetOffsetY = { it },
+                            animationSpec = androidx.compose.animation.core.spring(
+                                dampingRatio = androidx.compose.animation.core.Spring.DampingRatioMediumBouncy,
+                                stiffness = androidx.compose.animation.core.Spring.StiffnessMedium,
+                            ),
+                        ) + fadeOut()
                 }
             },
-            label = "drawerTransition",
-        ) { drawerOpen ->
-            if (drawerOpen) {
-                AppDrawer(onClose = { showDrawer = false })
+            label = "appLibraryTransition",
+        ) { libraryOpen ->
+            if (libraryOpen) {
+                AppLibrary(onClose = { showAppLibrary = false })
             } else {
-                HomeScreen(
-                    onOpenDrawer = { showDrawer = true },
+                iOSHomeScreen(
+                    onOpenAppLibrary = { showAppLibrary = true },
                     onOpenSettings = {
                         context.startActivity(
                             android.content.Intent(context, SettingsActivity::class.java)

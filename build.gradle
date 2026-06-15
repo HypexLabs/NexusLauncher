@@ -75,4 +75,12 @@ dependencies {
     implementation libs.androidx.activity.compose
     implementation libs.androidx.navigation.compose
     debugImplementation libs.compose.ui.tooling
+
+    implementation libs.cupertino
+    implementation libs.cupertino.icons.extended
+    implementation libs.haze
+    implementation libs.haze.materials
+    implementation libs.calf.ui
+    implementation libs.calf.file.picker
+    implementation libs.calf.permissions
 }

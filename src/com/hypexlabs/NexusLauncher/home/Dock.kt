@@ -1,91 +1,103 @@
 package com.hypexlabs.NexusLauncher.home
 
-import android.graphics.Bitmap
-import android.graphics.drawable.BitmapDrawable
-import android.graphics.drawable.Drawable
+import androidx.compose.animation.*
+import androidx.compose.animation.core.spring
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Apps
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.asImageBitmap
-import androidx.compose.ui.graphics.painter.BitmapPainter
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.hypexlabs.NexusLauncher.model.AppInfo
+import com.hypexlabs.NexusLauncher.util.iOSIconShape
+import dev.chrisbanes.haze.HazeState
+import dev.chrisbanes.haze.hazeEffect
+import dev.chrisbanes.haze.HazeStyle
+import dev.chrisbanes.haze.HazeTint
 
 @Composable
 fun Dock(
     apps: List<AppInfo>,
-    onAppClick: (AppInfo) -> Unit,
-    onAllAppsClick: () -> Unit,
+    onOpenAppLibrary: () -> Unit,
     modifier: Modifier = Modifier,
+    hazeState: HazeState,
+    iconSize: Dp = 56.dp,
 ) {
     Box(
         modifier = modifier
             .fillMaxWidth()
-            .padding(16.dp)
-            .clip(RoundedCornerShape(24.dp))
-            .background(Color.White.copy(alpha = 0.4f))
+            .padding(horizontal = 16.dp)
             .then(
-                Modifier.background(MaterialTheme.colorScheme.surfaceContainerLow.copy(alpha = 0.6f))
+                Modifier
+                    .clip(RoundedCornerShape(24.dp))
+                    .background(Color.White.copy(alpha = 0.15f))
+                    .hazeEffect(
+                        style = HazeStyle(
+                            backgroundColor = Color(0x99E5E5EA),
+                            blurRadius = 30.dp,
+                            noiseFactor = 0.04f,
+                            tints = listOf(HazeTint(Color.White.copy(alpha = 0.25f))),
+                        )
+                    ),
             )
             .padding(8.dp),
     ) {
-        LazyRow(
-            horizontalArrangement = Arrangement.spacedBy(8.dp),
+        Row(
+            horizontalArrangement = Arrangement.SpaceEvenly,
             verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(8.dp),
-            contentPadding = PaddingValues(horizontal = 8.dp),
+            modifier = Modifier.fillMaxWidth(),
         ) {
-            items(apps) { app ->
-                DockIcon(app = app, onClick = { onAppClick(app) })
+            apps.forEach { app ->
+                DockIcon(
+                    app = app,
+                    onClick = {
+                        com.hypexlabs.NexusLauncher.util.AppProvider.launchApp(
+                            androidx.compose.ui.platform.LocalContext.current,
+                            app.packageName,
+                        )
+                    },
+                    iconSize = iconSize,
+                )
             }
-            item { AllAppsIcon(onClick = onAllAppsClick) }
+
+            AppLibraryIcon(
+                onClick = onOpenAppLibrary,
+                iconSize = iconSize,
+            )
         }
     }
 }
 
 @Composable
-private fun DockIcon(app: AppInfo, onClick: () -> Unit) {
-    IconButton(onClick = onClick, modifier = Modifier.size(56.dp)) {
-        Icon(
-            painter = app.icon.toComposePainter(),
-            contentDescription = app.label,
-            tint = Color.Unspecified,
-        )
+private fun AppLibraryIcon(
+    onClick: () -> Unit,
+    iconSize: Dp,
+) {
+    IconButton(
+        onClick = onClick,
+        modifier = Modifier.size(iconSize),
+    ) {
+        Box(
+            modifier = Modifier
+                .size(iconSize - 4.dp)
+                .clip(RoundedCornerShape(12.dp))
+                .background(Color.White.copy(alpha = 0.3f)),
+            contentAlignment = Alignment.Center,
+        ) {
+            Icon(
+                imageVector = androidx.compose.material.icons.Icons.Default.Apps,
+                contentDescription = "App Library",
+                tint = Color.White,
+                modifier = Modifier.size(24.dp),
+            )
+        }
     }
-}
-
-@Composable
-private fun AllAppsIcon(onClick: () -> Unit) {
-    IconButton(onClick = onClick, modifier = Modifier.size(56.dp)) {
-        Icon(
-            imageVector = Icons.Default.Apps,
-            contentDescription = "All Apps",
-            tint = MaterialTheme.colorScheme.onSurface,
-        )
-    }
-}
-
-fun Drawable.toComposePainter(): BitmapPainter {
-    val bitmap = (this as? BitmapDrawable)?.bitmap
-        ?: Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888)
-    return BitmapPainter(bitmap.asImageBitmap())
 }

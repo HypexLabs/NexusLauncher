@@ -7,6 +7,9 @@ androidx-lifecycle = "2.10.0"
 androidx-activity-compose = "1.9.3"
 androidx-navigation = "2.8.5"
 lottie = "6.7.1"
+cupertino = "3.3.1"
+haze = "1.7.2"
+calf = "0.12.0"
 
 [libraries]
 androidx-core-ktx = { module = "androidx.core:core-ktx", version.ref = "androidx-core" }
@@ -25,6 +28,14 @@ compose-material-icons = { module = "androidx.compose.material:material-icons-ex
 compose-foundation = { module = "androidx.compose.foundation:foundation" }
 compose-animation = { module = "androidx.compose.animation:animation" }
 compose-runtime = { module = "androidx.compose.runtime:runtime" }
+
+cupertino = { module = "io.github.robinpcrd:cupertino", version.ref = "cupertino" }
+cupertino-icons-extended = { module = "io.github.robinpcrd:cupertino-icons-extended", version.ref = "cupertino" }
+haze = { module = "dev.chrisbanes.haze:haze", version.ref = "haze" }
+haze-materials = { module = "dev.chrisbanes.haze:haze-materials", version.ref = "haze" }
+calf-ui = { module = "com.mohamedrejeb.calf:calf-ui", version.ref = "calf" }
+calf-file-picker = { module = "com.mohamedrejeb.calf:calf-file-picker", version.ref = "calf" }
+calf-permissions = { module = "com.mohamedrejeb.calf:calf-permissions", version.ref = "calf" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
