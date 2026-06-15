@@ -16,9 +16,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.hypexlabs.NexusLauncher.model.AppInfo
+import com.hypexlabs.NexusLauncher.util.AppProvider
 import com.hypexlabs.NexusLauncher.util.iOSIconShape
 import dev.chrisbanes.haze.HazeState
 import dev.chrisbanes.haze.hazeEffect
@@ -33,6 +35,7 @@ fun Dock(
     hazeState: HazeState,
     iconSize: Dp = 56.dp,
 ) {
+    val context = LocalContext.current
     Box(
         modifier = modifier
             .fillMaxWidth()
@@ -61,8 +64,8 @@ fun Dock(
                 DockIcon(
                     app = app,
                     onClick = {
-                        com.hypexlabs.NexusLauncher.util.AppProvider.launchApp(
-                            androidx.compose.ui.platform.LocalContext.current,
+                                AppProvider.launchApp(
+                                    context,
                             app.packageName,
                         )
                     },

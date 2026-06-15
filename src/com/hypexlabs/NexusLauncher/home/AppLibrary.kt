@@ -128,7 +128,7 @@ fun AppLibrary(
                             columns = GridCells.Fixed(4),
                             horizontalArrangement = Arrangement.spacedBy(8.dp),
                             verticalArrangement = Arrangement.spacedBy(8.dp),
-                            modifier = Modifier.height((apps.size / 4 + 1) * 80.dp),
+                            modifier = Modifier.height(80.dp * ((apps.size + 3) / 4)),
                             userScrollEnabled = false,
                         ) {
                             items(apps, key = { it.uniqueKey }) { app ->

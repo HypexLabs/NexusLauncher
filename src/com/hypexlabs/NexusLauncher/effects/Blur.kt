@@ -28,6 +28,7 @@ fun Modifier.frostedSearch(dark: Boolean = false): Modifier = this.then(
             backgroundColor = if (dark) Color(0x1AFFFFFF) else Color(0x1A767680),
             blurRadius = 20.dp,
             noiseFactor = 0.02f,
+            tints = emptyList(),
         )
     )
 )
