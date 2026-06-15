@@ -50,11 +50,6 @@ allprojects {
     }
 
     configurations.configureEach {
-        resolutionStrategy.eachDependency {
-            if ("${requested.group}:${requested.name}" == "androidx.core:core") {
-                useVersion("1.15.0")
-            }
-        }
     }
 }
 
