@@ -6,6 +6,8 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Apps
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -93,7 +95,7 @@ private fun AppLibraryIcon(
             contentAlignment = Alignment.Center,
         ) {
             Icon(
-                imageVector = androidx.compose.material.icons.Icons.Filled.Apps,
+                imageVector = Icons.Filled.Apps,
                 contentDescription = "App Library",
                 tint = Color.White,
                 modifier = Modifier.size(24.dp),
